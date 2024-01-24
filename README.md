@@ -103,6 +103,7 @@ tree = ET.parse('example.xml')
 root = tree.getroot()
 for child in root:
     print(child.tag, child.attrib)
+EOF
 ```
 
 ## json
@@ -141,6 +142,7 @@ chmod read-text
 import json
 with open('example.json', 'r') as file:
     data = json.load(file)
+EOF
 ```
 
 ## pickle
@@ -157,6 +159,7 @@ import pickle
 data = {'name': 'Alice', 'age': 30, 'city': 'New York'}
 with open('example.pkl', 'wb') as file:
     pickle.dump(data, file)
+EOF
 ```
 
 ```bash
@@ -168,5 +171,6 @@ import pickle
 with open('example.pkl', 'rb') as file:
     data = pickle.load(file)
 print(data)
+EOF
 ```
 
