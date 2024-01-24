@@ -74,7 +74,7 @@ cat >> scraping << 'EOF'
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
-import request
+import requests
 
 # Selenium setup
 url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
