@@ -10,6 +10,16 @@ mkdir python_files && cd python_files
 
 ## Text
 
+```bash
+cd ~
+cd ws
+cd python_files
+cat >> example.txt << 'EOF'
+Hello, World!
+This is a sample text file.
+EOF
+```
+
 ```
 cd ~
 cd ws
@@ -23,6 +33,17 @@ EOF
 ```
 
 ## csv
+
+```bash
+cd ~
+cd ws
+cd python_files
+cat >> example.csv << 'EOF'
+name,age,city
+Alice,30,New York
+Bob,25,Los Angeles
+EOF
+```
 
 ```bash
 cd ~
@@ -44,6 +65,26 @@ with open('example.csv', 'r') as file:
 cd ~
 cd ws
 cd python_files
+cat >> example.xml << 'EOF'
+<users>
+  <user>
+    <name>Alice</name>
+    <age>30</age>
+    <city>New York</city>
+  </user>
+  <user>
+    <name>Bob</name>
+    <age>25</age>
+    <city>Los Angeles</city>
+  </user>
+</users>
+EOF
+```
+
+```bash
+cd ~
+cd ws
+cd python_files
 echo '#!'"$(which python3)" >  read-xml
 chmod +x read-xml
 cat >> read-xml << 'EOF'
@@ -55,6 +96,29 @@ for child in root:
 ```
 
 ## json
+
+```bash
+cd ~
+cd ws
+cd python_files
+cat >> example.json << 'EOF'
+{
+  "users": [
+    {
+      "name": "Alice",
+      "age": 30,
+      "city": "New York"
+    },
+    {
+      "name": "Bob",
+      "age": 25,
+      "city": "Los Angeles"
+    }
+  ]
+}
+EOF
+```
+
 
 ```bash
 cd ~
@@ -95,3 +159,4 @@ with open('example.pkl', 'rb') as file:
     data = pickle.load(file)
 print(data)
 ```
+
