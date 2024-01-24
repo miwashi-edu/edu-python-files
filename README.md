@@ -29,6 +29,15 @@ chmod +x read-text
 cat >> read-text << 'EOF'
 with open('example.txt', 'r') as file:
     content = file.read()
+    print(content)
+EOF
+
+echo '#!'"$(which python3)" >  read-text-by-lines
+chmod +x read-text-by-lines
+cat >> read-text-by-lines << 'EOF'
+with open('example.txt', 'r') as file:
+    for line in file:
+        print(line.strip())
 EOF
 ```
 
