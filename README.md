@@ -78,7 +78,7 @@ import requests
 
 # Selenium setup
 url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
-driver = webdriver.Chrome('/home/devuser/ws/python_files/chromedriver')  # Replace with the correct path to your Chromedriver
+driver = webdriver.Chrome('./chromedriver')  # Replace with the correct path to your Chromedriver
 driver.get(url)
 
 # Wait for JavaScript to load the content
