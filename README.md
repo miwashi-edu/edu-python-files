@@ -142,6 +142,7 @@ chmod read-text
 import json
 with open('example.json', 'r') as file:
     data = json.load(file)
+    println(data)
 EOF
 ```
 
