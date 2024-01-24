@@ -58,9 +58,9 @@ EOF
 cd ~
 cd ws
 cd python_files
-echo '#!'"$(which python3)" >  read-xml
-chmod +x read-xml
-cat >> read-xml << 'EOF'
+echo '#!'"$(which python3)" >  read-csv
+chmod +x read-csv
+cat >> read-csv << 'EOF'
 import csv
 with open('example.csv', 'r') as file:
     reader = csv.reader(file)
@@ -137,8 +137,8 @@ cd ws
 cd python_files
 echo '#!'"$(which python3)" >  read-json
 chmod +x read-json
-cat >> read-text << 'EOF'
-chmod read-text
+cat >> read-json << 'EOF'
+chmod read-json
 import json
 with open('example.json', 'r') as file:
     data = json.load(file)
