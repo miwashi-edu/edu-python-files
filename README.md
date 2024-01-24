@@ -14,7 +14,7 @@ mkdir python_files && cd python_files
 cd ~
 cd ws
 cd python_files
-cat >> example.txt << 'EOF'
+cat > example.txt << 'EOF'
 Hello, World!
 This is a sample text file.
 EOF
@@ -47,7 +47,7 @@ EOF
 cd ~
 cd ws
 cd python_files
-cat >> example.csv << 'EOF'
+cat > example.csv << 'EOF'
 name,age,city
 Alice,30,New York
 Bob,25,Los Angeles
@@ -75,7 +75,7 @@ EOF
 cd ~
 cd ws
 cd python_files
-cat >> example.xml << 'EOF'
+cat > example.xml << 'EOF'
 <users>
   <user>
     <name>Alice</name>
@@ -99,10 +99,15 @@ echo '#!'"$(which python3)" >  read-xml
 chmod +x read-xml
 cat >> read-xml << 'EOF'
 import xml.etree.ElementTree as ET
+
 tree = ET.parse('example.xml')
 root = tree.getroot()
-for child in root:
-    print(child.tag, child.attrib)
+
+for user in root.findall('user'):
+    name = user.find('name').text
+    age = user.find('age').text
+    city = user.find('city').text
+    print(f"Name: {name}, Age: {age}, City: {city}")
 EOF
 ```
 
@@ -112,7 +117,7 @@ EOF
 cd ~
 cd ws
 cd python_files
-cat >> example.json << 'EOF'
+cat > example.json << 'EOF'
 {
   "users": [
     {
@@ -138,11 +143,10 @@ cd python_files
 echo '#!'"$(which python3)" >  read-json
 chmod +x read-json
 cat >> read-json << 'EOF'
-chmod read-json
 import json
 with open('example.json', 'r') as file:
     data = json.load(file)
-    println(data)
+    print(data)
 EOF
 ```
 
