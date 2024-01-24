@@ -7,14 +7,14 @@ cd ~
 cd ws
 mkdir python_files && cd python_files
 pip install selenium requests beautifulsoup4 requests-html pyppeteer
-
+pip install chromedriver-py # Replaces downloaded chromedriver
 #Important to go to https://chromedriver.storage.googleapis.com and check the version is compatible with installed chrome
-curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_mac64.zip
-curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_mac_arm64.zip
-curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
-unzip chromedriver_linux64.zip # Uzipping for Kali linux
-chmod +x ./chromedriver
+#curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+#curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_mac64.zip
+#curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_mac_arm64.zip
+#curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+#unzip chromedriver_linux64.zip # Uzipping for Kali linux
+#chmod +x ./chromedriver
 ```
 
 ## Scraping Static
@@ -78,7 +78,9 @@ import requests
 
 # Selenium setup
 url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
-driver = webdriver.Chrome('/Users/miwa/ws/python_files/chromedriver')  # Replace with the correct path to your Chromedriver
+url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
+svc = webdriver.ChromeService(executable_path=binary_path)
+driver = webdriver.Chrome(service=svc)
 driver.get(url)
 
 # Wait for JavaScript to load the content
