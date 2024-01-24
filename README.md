@@ -6,105 +6,176 @@
 cd ~
 cd ws
 mkdir python_files && cd python_files
-pip install selenium requests beautifulsoup4 requests-html pyppeteer
-curl -LO https://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip .
-chmod +x ./chromedriver
 ```
 
-## Scraping Static
+## Text
 
 ```bash
 cd ~
 cd ws
 cd python_files
-echo '#!'"$(which python3)" >  scraping
-chmod +x scraping
-cat >> scraping << 'EOF'
-import requests
-from bs4 import BeautifulSoup
-
-url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
-response = requests.get(url)
-html_content = response.text
-
-# Parse HTML with BeautifulSoup
-soup = BeautifulSoup(html_content, 'html.parser')
-
-# Find all <a> tags with 'href' attribute
-all_urls = [a['href'] for a in soup.find_all('a', href=True)]
-
-# Filter URLs to include only those that start with "maccdc"
-file_urls = list(filter(lambda u: 'maccdc' in u, all_urls))
-
-# Download each file
-for url in file_urls:
-    try:
-        print(f"Attempting to download {url}")
-        response = requests.get(url)
-        filename = url.split('/')[-1]
-
-        # Write the file content
-        with open(filename, 'wb') as file:
-            file.write(response.content)
-        print(f"Successfully downloaded {filename}")
-    except Exception as e:
-        print(f"An error occurred while downloading or writing the file {filename}: {e}")
-        continue  # Skip to the next file
-
-# Add additional code here for unpacking and joining files if needed
+cat > example.txt << 'EOF'
+Hello, World!
+This is a sample text file.
 EOF
 ```
 
-## Scraping Dynamic -- Selenium
+```
+cd ~
+cd ws
+cd python_files
+echo '#!'"$(which python3)" >  read-text
+chmod +x read-text
+cat >> read-text << 'EOF'
+with open('example.txt', 'r') as file:
+    content = file.read()
+    print(content)
+EOF
+
+echo '#!'"$(which python3)" >  read-text-by-lines
+chmod +x read-text-by-lines
+cat >> read-text-by-lines << 'EOF'
+with open('example.txt', 'r') as file:
+    for line in file:
+        print(line.strip())
+EOF
+```
+
+## csv
 
 ```bash
 cd ~
 cd ws
 cd python_files
-echo '#!'"$(which python3)" >  scraping
-chmod +x scraping
-cat >> scraping << 'EOF'
-from selenium import webdriver
-from bs4 import BeautifulSoup
-import time
-
-# Selenium setup
-url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
-driver = webdriver.Chrome('/home/devuser/ws/web-scraping/chromedriver')  # Replace with the correct path to your Chromedriver
-driver.get(url)
-
-# Wait for JavaScript to load the content
-time.sleep(5)  # Adjust time as necessary
-
-# Fetching the HTML content after JavaScript execution
-html_content = driver.page_source
-driver.quit()
-
-# Parse HTML with BeautifulSoup
-soup = BeautifulSoup(html_content, 'html.parser')
-
-# Find all <a> tags with 'href' attribute
-all_urls = [a['href'] for a in soup.find_all('a', href=True)]
-print(f"Scraped {len(all_urls)} urls!")
-
-# Filter URLs to include only those that contain "maccdc2012"
-file_urls = list(filter(lambda u: 'maccdc2012' in u, all_urls))
-print(f"Found {len(file_urls)} urls!")
-
-# Download each file
-for url in file_urls:
-    try:
-        print(f"Attempting to download {url}")
-        response = requests.get(url)
-        filename = url.split('/')[-1]
-
-        # Write the file content
-        with open(filename, 'wb') as file:
-            file.write(response.content)
-        print(f"Successfully downloaded {filename}")
-    except Exception as e:
-        print(f"An error occurred while downloading or writing the file {filename}: {e}")
-        continue  # Skip to the next file
+cat > example.csv << 'EOF'
+name,age,city
+Alice,30,New York
+Bob,25,Los Angeles
 EOF
 ```
+
+```bash
+cd ~
+cd ws
+cd python_files
+echo '#!'"$(which python3)" >  read-csv
+chmod +x read-csv
+cat >> read-csv << 'EOF'
+import csv
+with open('example.csv', 'r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+EOF
+```
+
+## xml
+
+```bash
+cd ~
+cd ws
+cd python_files
+cat > example.xml << 'EOF'
+<users>
+  <user>
+    <name>Alice</name>
+    <age>30</age>
+    <city>New York</city>
+  </user>
+  <user>
+    <name>Bob</name>
+    <age>25</age>
+    <city>Los Angeles</city>
+  </user>
+</users>
+EOF
+```
+
+```bash
+cd ~
+cd ws
+cd python_files
+echo '#!'"$(which python3)" >  read-xml
+chmod +x read-xml
+cat >> read-xml << 'EOF'
+import xml.etree.ElementTree as ET
+
+tree = ET.parse('example.xml')
+root = tree.getroot()
+
+for user in root.findall('user'):
+    name = user.find('name').text
+    age = user.find('age').text
+    city = user.find('city').text
+    print(f"Name: {name}, Age: {age}, City: {city}")
+EOF
+```
+
+## json
+
+```bash
+cd ~
+cd ws
+cd python_files
+cat > example.json << 'EOF'
+{
+  "users": [
+    {
+      "name": "Alice",
+      "age": 30,
+      "city": "New York"
+    },
+    {
+      "name": "Bob",
+      "age": 25,
+      "city": "Los Angeles"
+    }
+  ]
+}
+EOF
+```
+
+
+```bash
+cd ~
+cd ws
+cd python_files
+echo '#!'"$(which python3)" >  read-json
+chmod +x read-json
+cat >> read-json << 'EOF'
+import json
+with open('example.json', 'r') as file:
+    data = json.load(file)
+    print(data)
+EOF
+```
+
+## pickle
+
+```bash
+cd ~
+cd ws
+cd python_files
+echo '#!'"$(which python3)" >  write-pickle
+chmod +x write-pickle
+cat >> write-pickle << 'EOF'
+import pickle
+
+data = {'name': 'Alice', 'age': 30, 'city': 'New York'}
+with open('example.pkl', 'wb') as file:
+    pickle.dump(data, file)
+EOF
+```
+
+```bash
+echo '#!'"$(which python3)" >  read-pickle
+chmod +x read-pickle
+cat >> read-pickle << 'EOF'
+import pickle
+
+with open('example.pkl', 'rb') as file:
+    data = pickle.load(file)
+print(data)
+EOF
+```
+
