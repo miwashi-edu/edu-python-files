@@ -7,8 +7,13 @@ cd ~
 cd ws
 mkdir python_files && cd python_files
 pip install selenium requests beautifulsoup4 requests-html pyppeteer
-curl -LO https://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip .
+
+#Important to go to https://chromedriver.storage.googleapis.com and check the version is compatible with installed chrome
+curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_mac64.zip
+curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_mac_arm64.zip
+curl -LO https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_win32.zip
+unzip chromedriver_linux64.zip # Uzipping for Kali linux
 chmod +x ./chromedriver
 ```
 
@@ -68,6 +73,7 @@ cat >> scraping << 'EOF'
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
+import request
 
 # Selenium setup
 url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
