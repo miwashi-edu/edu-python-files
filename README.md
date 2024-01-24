@@ -43,6 +43,7 @@ all_urls = [a['href'] for a in soup.find_all('a', href=True)]
 file_urls = list(filter(lambda u: 'maccdc' in u, all_urls))
 
 # Download each file
+filename = ""
 for url in file_urls:
     try:
         print(f"Attempting to download {url}")
@@ -77,7 +78,7 @@ import request
 
 # Selenium setup
 url = "https://share.netresec.com/s/7qgDSGNGw2NY8ea"
-driver = webdriver.Chrome('/home/devuser/ws/web-scraping/chromedriver')  # Replace with the correct path to your Chromedriver
+driver = webdriver.Chrome('/home/devuser/ws/python_files/chromedriver')  # Replace with the correct path to your Chromedriver
 driver.get(url)
 
 # Wait for JavaScript to load the content
